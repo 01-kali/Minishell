@@ -1,0 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command_status.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iboutadg <iboutadg@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/04 03:25:21 by ayel-mou          #+#    #+#             */
+/*   Updated: 2024/10/28 00:28:11 by iboutadg         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <minishell.h>
+
+int	no_file_no_dir(char *cmd)
+{
+	write(2, M_SHELL, 23);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, ": No such file or directory\n", 29);
+	g_helper.exit_status = 127;
+	return (g_helper.exit_status);
+}
+
+int	get_permission(char *file)
+{
+	if (access(file, X_OK) != 0)
+	{
+		g_helper.exit_status = 126;
+		write(2, M_SHELL, 23);
+		write(2, file, ft_strlen(file));
+		write(2, " : Permission denied\n", 22);
+		return (g_helper.exit_status);
+	}
+	return (0);
+}
+
+int	command_not_found(char *cmd)
+{
+	write(2, M_SHELL, 23);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, ": command not found\n", 21);
+	g_helper.exit_status = 127;
+	return (g_helper.exit_status);
+}
+
+int	is_dir(char *dir)
+{
+	g_helper.exit_status = 126;
+	write(2, M_SHELL, 23);
+	write(2, dir, ft_strlen(dir));
+	write(2, ": Is a directory\n", 18);
+	return (g_helper.exit_status);
+}
