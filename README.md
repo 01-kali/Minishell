@@ -58,5 +58,5 @@ if you want to remove the object files you can run `make clean`. if you want to 
 
 ## authors
 
-    *zelkalai*
-    *ayel-mou*
+*zelkalai*
+*ayel-mou*
